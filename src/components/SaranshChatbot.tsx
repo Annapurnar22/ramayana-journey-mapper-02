@@ -16,61 +16,102 @@ const SaranshChatbot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Namaste! 🙏 Welcome to Footsteps of Rama! I'm Saransh AI, your digital guide for exploring Lord Rama's sacred journey. You can explore our interactive map, learn about specific locations, follow the timeline of events, and discover cultural significance. How can I assist you today?",
+      text: "Namaste! 🙏 Welcome to Footsteps of Rama! I'm here to guide you through Lord Rama's sacred journey. I can help you navigate our interactive map, learn about sacred locations, or discover the cultural significance of Rama's journey. What interests you most?",
       isUser: false,
       timestamp: new Date()
     }
   ]);
   const [inputText, setInputText] = useState('');
+  const [showQuestions, setShowQuestions] = useState(true);
+
+  const starterQuestions = [
+    "How do I use this website?",
+    "Tell me about Chitrakoot",
+    "What happened at Ayodhya?",
+    "How long was Rama's exile?",
+    "Can I visit these places?",
+    "I'm new to Ramayana"
+  ];
 
   const getAIResponse = (userMessage: string): string => {
     const lowerMessage = userMessage.toLowerCase();
     
-    if (lowerMessage.includes('namaste') || lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-      return "Namaste! 🙏 I'm honored to guide you through Lord Rama's divine journey. You can explore our interactive map to trace the path from Ayodhya to Lanka, learn about sacred locations, or discover the cultural heritage. How may I help you explore this spiritual journey?";
+    // Greetings & Welcome Messages
+    if (lowerMessage.includes('namaste') || lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('welcome')) {
+      return "Welcome, dear visitor! I'm here to guide you through Lord Rama's sacred journey. Feel free to ask me about any location, event, or how to use our website features!";
     }
     
-    if (lowerMessage.includes('map') || lowerMessage.includes('interactive') || lowerMessage.includes('journey') || lowerMessage.includes('path')) {
-      return "Our Interactive Map Journey traces Lord Rama's complete path during his 14-year exile. You'll find 16 sacred locations from Ayodhya to Lanka, each marked with detailed information about events that took place there. Visit the 'Mapping Ramayana Trail' section to explore this divine route and click on markers for historical insights.";
+    // Navigation & Website Help
+    if (lowerMessage.includes('how do i use') || lowerMessage.includes('how to use') || lowerMessage.includes('navigate')) {
+      return "Great question! Here's how to explore:\n\n📍 Interactive Map: Click on location markers to learn about each place\n⏰ Timeline: Follow the chronological journey from Ayodhya to Lanka\n🔍 Search: Use the search bar to find specific locations\n📱 Mobile: Swipe and tap to navigate easily on your phone\n\nWould you like me to guide you to a specific section?";
     }
     
-    if (lowerMessage.includes('ayodhya')) {
-      return "Ayodhya, the birthplace of Lord Rama, is where the epic begins. It's the capital of Kosala kingdom where Rama was born to King Dasharatha. This sacred city is where Rama's exile story starts. You can explore Ayodhya and other locations on our interactive map to learn more about their significance.";
+    if (lowerMessage.includes('where is the map') || lowerMessage.includes("can't find the map") || lowerMessage.includes('find map')) {
+      return "The interactive map is right on our homepage! Look for the large map showing India with colored route markers. If you don't see it, try refreshing the page or clicking 'Home' in the navigation menu. The map shows Rama's complete journey with clickable locations.";
     }
     
-    if (lowerMessage.includes('lanka') || lowerMessage.includes('ravana')) {
-      return "Lanka, the golden city ruled by Ravana, is where Sita was held captive. This is where the great war took place between Rama's forces and Ravana's army. The victory at Lanka marked the triumph of good over evil. Explore our map to see Lanka's location and learn about this crucial part of the journey.";
+    if (lowerMessage.includes('how do i search') || lowerMessage.includes('search for locations')) {
+      return "You can search in two ways:\n\n🔍 Use the search bar at the top of the page\n📍 Click directly on location markers on the map\n📋 Browse by regions using the menu\n\nTry searching for popular places like 'Chitrakoot' or 'Panchvati'!";
     }
     
-    if (lowerMessage.includes('chitrakoot') || lowerMessage.includes('panchvati') || lowerMessage.includes('kishkindha')) {
-      return "These are sacred locations from Rama's exile journey! Chitrakoot is where Rama, Sita, and Lakshmana spent peaceful years. Panchvati is where Sita was abducted. Kishkindha is where Rama met Hanuman and Sugriva. Each location has deep spiritual significance - explore them on our interactive map for detailed stories.";
+    // Location-Specific Queries
+    if (lowerMessage.includes('chitrakoot')) {
+      return "Chitrakoot is a sacred location where Rama, Sita, and Lakshmana spent peaceful years during their exile. It's located on the border of Uttar Pradesh and Madhya Pradesh. Here they lived in hermitages and interacted with sages. Click on the Chitrakoot marker on our map to see beautiful illustrations and learn about the events that took place there!";
     }
     
-    if (lowerMessage.includes('sita') || lowerMessage.includes('lakshmana') || lowerMessage.includes('hanuman')) {
-      return "The divine characters of Ramayana! Sita represents devotion and purity, Lakshmana embodies loyalty and service, and Hanuman symbolizes strength and devotion. Their journey alongside Rama teaches us about dharma, devotion, and righteousness. Learn more about their roles in our Immersive View section.";
+    if (lowerMessage.includes('panchvati')) {
+      return "Panchvati is a crucial location in Rama's journey, located in present-day Nashik, Maharashtra. This is where Surpanakha encountered Rama and Lakshmana, leading to significant events. It's also where Sita was abducted by Ravana. Explore the Panchvati section on our map to discover the full story and its cultural significance!";
     }
     
-    if (lowerMessage.includes('culture') || lowerMessage.includes('art') || lowerMessage.includes('heritage')) {
-      return "The Ramayana has inspired countless art forms, music, dance, and cultural traditions across India and beyond. Visit our 'Culture & Arts' section to explore traditional paintings, classical performances, regional variations, and how this epic continues to influence contemporary culture. You'll find audio-visual content and heritage galleries there.";
+    if (lowerMessage.includes('ayodhya') || lowerMessage.includes('what happened at ayodhya')) {
+      return "Ayodhya is where Rama's journey began - his birthplace and the kingdom he left behind. The exile started when Rama honored his father Dasharatha's promise to Kaikeyi. Our timeline feature shows the events leading to the exile. Click on Ayodhya on the map to see the emotional departure and the promise to return after 14 years.";
     }
     
-    if (lowerMessage.includes('travel') || lowerMessage.includes('pilgrimage') || lowerMessage.includes('visit') || lowerMessage.includes('tour')) {
-      return "Planning a spiritual journey? Our Trip Planner offers various pilgrimage packages to visit the actual locations from Rama's journey. You can choose from the Sacred Express Package, IRCTC Ramayana Circuit Tour, or customize your own spiritual pilgrimage. Discover these sacred places where the divine events actually took place!";
+    if (lowerMessage.includes('lanka')) {
+      return "Lanka represents the climax of Rama's journey - where he rescued Sita from Ravana. Our map shows the route to Lanka and the great battle that took place there. This marked the end of the exile and the beginning of their return journey. Explore the Lanka section to learn about the epic battle and victory of good over evil!";
     }
     
-    if (lowerMessage.includes('story') || lowerMessage.includes('kanda') || lowerMessage.includes('chapters')) {
-      return "The Ramayana is beautifully divided into six Kandas (books): Bala Kanda (Childhood), Ayodhya Kanda (Exile), Aranya Kanda (Forest), Kishkindha Kanda (Monkey Kingdom), Sundara Kanda (Hanuman's Journey), and Yuddha Kanda (War). Each Kanda reveals profound spiritual teachings. Explore our Immersive View to journey through each chapter.";
+    // Journey & Story Queries
+    if (lowerMessage.includes('how long') || lowerMessage.includes('14 years') || lowerMessage.includes('exile duration')) {
+      return "Rama's exile lasted exactly 14 years, as promised to Kaikeyi. Our timeline feature breaks this down into different phases - from the initial departure from Ayodhya to the final return. You can explore each year and the significant events that occurred. Would you like to see the timeline view of the complete journey?";
     }
     
-    if (lowerMessage.includes('use') || lowerMessage.includes('navigate') || lowerMessage.includes('website') || lowerMessage.includes('how')) {
-      return "I'm here to help you navigate our website! Use the menu to access: 'Immersive View' for the complete story, 'Mapping Ramayana Trail' for the journey map, 'Trip Planner' for pilgrimage packages, and 'Culture & Arts' for heritage content. Each section offers a unique way to experience Lord Rama's divine journey. What would you like to explore first?";
+    if (lowerMessage.includes('who went with') || lowerMessage.includes('companions') || lowerMessage.includes('sita') || lowerMessage.includes('lakshmana')) {
+      return "Rama was accompanied by his devoted wife Sita and his loyal brother Lakshmana throughout the 14-year exile. Later, Hanuman and the vanaras (monkeys) joined them in the quest to rescue Sita. Each character has their own story - explore our character profiles to learn more about their roles in the journey!";
     }
     
-    if (lowerMessage.includes('dharma') || lowerMessage.includes('teachings') || lowerMessage.includes('spiritual')) {
-      return "The Ramayana is a profound guide to dharma and righteous living. Lord Rama's life exemplifies ideal kingship, devotion to duty, and moral conduct. The epic teaches us about family values, loyalty, courage, and the victory of good over evil. Every location and event in Rama's journey carries deep spiritual significance for seekers of truth.";
+    if (lowerMessage.includes('route') || lowerMessage.includes('path') || lowerMessage.includes('journey')) {
+      return "Rama's route went from Ayodhya → Chitrakoot → Dandakaranya → Panchvati → and finally to Lanka. The return journey retraced many of these steps. Our interactive map shows the complete route with all major stops, rest places, and significant events. You can follow the journey chronologically or explore specific regions!";
     }
     
-    return "Thank you for your question! As your guide to Lord Rama's sacred journey, I can help you explore our interactive map, learn about holy locations like Ayodhya and Lanka, discover cultural heritage, plan spiritual pilgrimages, or understand the profound teachings of the Ramayana. What aspect of this divine journey would you like to explore? 🙏";
+    // Cultural & Religious Queries
+    if (lowerMessage.includes('why important') || lowerMessage.includes('significance') || lowerMessage.includes('meaning')) {
+      return "Rama's journey represents the triumph of dharma (righteousness) over adharma (evil). It teaches us about duty, loyalty, sacrifice, and devotion. The exile shows how to face life's challenges with grace and determination. Many of these locations are still pilgrimage sites today, connecting ancient wisdom to modern spiritual practice.";
+    }
+    
+    if (lowerMessage.includes('can i visit') || lowerMessage.includes('pilgrimage') || lowerMessage.includes('travel')) {
+      return "Absolutely! Many locations from Rama's journey are popular pilgrimage destinations today. Places like Ayodhya, Chitrakoot, Nashik (Panchvati), and others have temples and sites dedicated to these events. Our website includes modern travel information and pilgrimage guides for those interested in following Rama's footsteps physically!";
+    }
+    
+    if (lowerMessage.includes('what can i learn') || lowerMessage.includes('learn here')) {
+      return "You can discover:\n\n📖 The complete story of Rama's exile with cultural context\n🗺️ Geographic connections between ancient and modern India\n🙏 Spiritual and philosophical lessons from the journey\n🎨 Beautiful illustrations and visual storytelling\n✈️ Information for planning your own pilgrimage\n🏛️ Historical and archaeological insights";
+    }
+    
+    // Technical Support
+    if (lowerMessage.includes('slow') || lowerMessage.includes('not working') || lowerMessage.includes('problem')) {
+      return "I'm sorry you're experiencing technical difficulties! Try these quick fixes:\n\n🔄 Refresh the page (F5 or pull down on mobile)\n🌐 Check your internet connection\n🗑️ Clear your browser cache\n🔄 Try a different browser\n\nIf problems persist, you can still browse using the menu navigation. Is there a specific location you'd like to learn about while we resolve this?";
+    }
+    
+    // General Support
+    if (lowerMessage.includes('new to ramayana') || lowerMessage.includes("i'm new")) {
+      return "Welcome to the beautiful world of Ramayana! This epic tells the story of Prince Rama's 14-year exile and his quest to rescue Sita. Don't worry if you're new - our website is designed to guide you through the journey step by step. Start with Ayodhya to understand how the exile began, then follow the map markers in order. Each location has beginner-friendly explanations!";
+    }
+    
+    if (lowerMessage.includes('learn more') || lowerMessage.includes('deepen') || lowerMessage.includes('more knowledge')) {
+      return "Wonderful! Here are ways to deepen your knowledge:\n\n📚 Follow the complete timeline from start to finish\n🎭 Read the cultural context sections for each location\n👥 Explore the character profiles and their relationships\n📖 Check out our resources section for further reading\n🚶 Consider planning a pilgrimage to these sacred sites\n\nWhat aspect interests you most - the spiritual teachings, historical connections, or the adventure story?";
+    }
+    
+    return "Thank you for your question! I'm here to help you explore Lord Rama's sacred journey. Whether you're interested in specific locations, the cultural significance, or how to navigate our website, I'm ready to assist. Is there anything else about Rama's journey I can help you explore? 🙏";
   };
 
   const handleSendMessage = () => {
@@ -92,6 +133,12 @@ const SaranshChatbot = () => {
 
     setMessages([...messages, userMessage, aiResponse]);
     setInputText('');
+    setShowQuestions(false);
+  };
+
+  const handleQuestionClick = (question: string) => {
+    setInputText(question);
+    handleSendMessage();
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -149,6 +196,22 @@ const SaranshChatbot = () => {
                     </div>
                   </div>
                 ))}
+                
+                {/* Starter Questions */}
+                {showQuestions && (
+                  <div className="space-y-2 mt-4">
+                    <p className="text-xs text-gray-500 text-center">Try asking:</p>
+                    {starterQuestions.map((question, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleQuestionClick(question)}
+                        className="w-full text-left p-2 text-xs bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors border border-orange-200"
+                      >
+                        {question}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               
               {/* Input Area */}
