@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Clock, Scroll } from 'lucide-react';
+import { MapPin, Clock, Palette } from 'lucide-react';
 
 const ImmersiveCallToAction = () => {
   return (
@@ -35,14 +35,14 @@ const ImmersiveCallToAction = () => {
             <p className="text-slate-600">Create a personalized journey to these sacred sites</p>
           </Link>
           <Link 
-            to="/resources" 
+            to="/culture-arts" 
             className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition hover-scale group"
           >
-            <div className="text-green-600 mb-4 group-hover:text-green-700">
-              <Scroll size={48} className="mx-auto" />
+            <div className="text-purple-600 mb-4 group-hover:text-purple-700">
+              <Palette size={48} className="mx-auto" />
             </div>
-            <h3 className="text-xl font-bold text-slate-800 mb-2">Study Resources</h3>
-            <p className="text-slate-600">Access authentic texts, audio, and scholarly materials</p>
+            <h3 className="text-xl font-bold text-slate-800 mb-2">Explore Culture & Arts</h3>
+            <p className="text-slate-600">Discover the artistic heritage and cultural expressions</p>
           </Link>
         </div>
       </div>

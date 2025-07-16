@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { MessageCircle, X, Send } from 'lucide-react';
+import { MessageCircle, X, Send, Maximize2, Minimize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -13,6 +12,7 @@ interface Message {
 
 const SaranshChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
@@ -147,20 +147,24 @@ const SaranshChatbot = () => {
     }
   };
 
+  const chatWidth = isExpanded ? 'w-96' : 'w-80';
+  const chatHeight = isExpanded ? 'h-[500px]' : 'h-96';
+
   return (
     <>
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 bg-gradient-to-r from-orange-600 to-orange-500 text-white p-4 rounded-full shadow-xl hover:from-orange-700 hover:to-orange-600 transition-all duration-300 z-50 animate-pulse hover:animate-none"
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-orange-600 to-orange-500 text-white p-4 rounded-full shadow-xl hover:from-orange-700 hover:to-orange-600 transition-all duration-300 z-50 animate-pulse hover:animate-none flex items-center gap-2"
         style={{ boxShadow: '0 8px 25px rgba(251, 146, 60, 0.4)' }}
       >
         <MessageCircle size={24} />
+        <span className="hidden sm:block font-medium">Saransh AI</span>
       </button>
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-80 h-96 bg-white rounded-2xl shadow-2xl border-2 border-orange-200 z-50 animate-scale-in">
+        <div className={`fixed bottom-6 right-6 ${chatWidth} ${chatHeight} bg-white rounded-2xl shadow-2xl border-2 border-orange-200 z-50 animate-scale-in`}>
           <Card className="h-full flex flex-col rounded-2xl overflow-hidden">
             <CardHeader className="bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-t-2xl">
               <div className="flex justify-between items-center">
@@ -168,12 +172,20 @@ const SaranshChatbot = () => {
                   <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
                   <CardTitle className="text-lg font-bold">Saransh AI</CardTitle>
                 </div>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="text-white hover:text-orange-200 transition-colors p-1 rounded-full hover:bg-orange-700/30"
-                >
-                  <X size={20} />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="text-white hover:text-orange-200 transition-colors p-1 rounded-full hover:bg-orange-700/30"
+                  >
+                    {isExpanded ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
+                  </button>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="text-white hover:text-orange-200 transition-colors p-1 rounded-full hover:bg-orange-700/30"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
               </div>
               <p className="text-orange-100 text-xs">Your guide to Rama's journey</p>
             </CardHeader>
