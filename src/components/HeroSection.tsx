@@ -1,6 +1,5 @@
 
 import { Link } from "react-router-dom";
-import { MessageCircle, Settings, Car, UserCheck } from "lucide-react";
 
 export const HeroSection = () => {
   return <>
@@ -27,6 +26,11 @@ export const HeroSection = () => {
       {/* Navigation Cards Section */}
       <section className="py-12 bg-gradient-to-b from-orange-50 to-white">
         <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-orange-700 mb-2">Let's begin our journey!!</h2>
+            <p className="text-gray-600">Choose your path to explore the epic of Ramayana</p>
+          </div>
+          
           <div className="flex justify-center gap-5 animate-fade-in flex-wrap mb-8">
             <Link to="/immersive" className="bg-purple-600 text-white px-7 py-3 rounded-full font-semibold hover:bg-purple-700 shadow-lg transition hover-scale text-lg">Experience the Epic</Link>
             <Link to="/map" className="bg-orange-600 text-white px-7 py-3 rounded-full font-semibold hover:bg-orange-700 shadow-lg transition hover-scale text-lg">The Ramayana Trail</Link>

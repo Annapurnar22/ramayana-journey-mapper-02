@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect, useRef } from 'react';
 import { MessageCircle, X, Send, Maximize2, Minimize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,13 +17,13 @@ const SaranshChatbot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Namaste! 🙏 Welcome to Footsteps of Rama! I'm here to guide you through Lord Rama's sacred journey. I can help you navigate our interactive map, learn about sacred locations, or discover the cultural significance of Rama's journey. What interests you most?",
+      text: "Namaste! 🙏 Welcome to Footsteps of Rama! Whether you're here for spiritual learning or planning a pilgrimage, I'm here to assist you.",
       isUser: false,
       timestamp: new Date()
     }
   ]);
   const [inputText, setInputText] = useState('');
-  const [showQuestions, setShowQuestions] = useState(true);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const starterQuestions = [
     "How do I use this website?",
@@ -33,13 +34,16 @@ const SaranshChatbot = () => {
     "I'm new to Ramayana"
   ];
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   const getAIResponse = (userMessage: string): string => {
     const lowerMessage = userMessage.toLowerCase();
-    
-    // Greetings & Welcome Messages
-    if (lowerMessage.includes('namaste') || lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('welcome')) {
-      return "Welcome, dear visitor! I'm here to guide you through Lord Rama's sacred journey. Feel free to ask me about any location, event, or how to use our website features!";
-    }
     
     // Navigation & Website Help
     if (lowerMessage.includes('how do i use') || lowerMessage.includes('how to use') || lowerMessage.includes('navigate')) {
@@ -102,13 +106,18 @@ const SaranshChatbot = () => {
       return "I'm sorry you're experiencing technical difficulties! Try these quick fixes:\n\n🔄 Refresh the page (F5 or pull down on mobile)\n🌐 Check your internet connection\n🗑️ Clear your browser cache\n🔄 Try a different browser\n\nIf problems persist, you can still browse using the menu navigation. Is there a specific location you'd like to learn about while we resolve this?";
     }
     
+    if (lowerMessage.includes('share') || lowerMessage.includes('how do i share')) {
+      return "You can easily share Footsteps of Rama:\n\n📋 Copy the website URL and send to friends\n📱 Use social media share buttons (if available)\n📸 Screenshot interesting map sections\n🔖 Bookmark specific locations for later\n💬 Tell others about this resource for learning about Rama's journey!";
+    }
+    
     // General Support
     if (lowerMessage.includes('new to ramayana') || lowerMessage.includes("i'm new")) {
       return "Welcome to the beautiful world of Ramayana! This epic tells the story of Prince Rama's 14-year exile and his quest to rescue Sita. Don't worry if you're new - our website is designed to guide you through the journey step by step. Start with Ayodhya to understand how the exile began, then follow the map markers in order. Each location has beginner-friendly explanations!";
     }
     
-    if (lowerMessage.includes('learn more') || lowerMessage.includes('deepen') || lowerMessage.includes('more knowledge')) {
-      return "Wonderful! Here are ways to deepen your knowledge:\n\n📚 Follow the complete timeline from start to finish\n🎭 Read the cultural context sections for each location\n👥 Explore the character profiles and their relationships\n📖 Check out our resources section for further reading\n🚶 Consider planning a pilgrimage to these sacred sites\n\nWhat aspect interests you most - the spiritual teachings, historical connections, or the adventure story?";
+    // Greetings & Welcome Messages
+    if (lowerMessage.includes('namaste') || lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+      return "Welcome back! I'm here to guide you through Lord Rama's sacred journey. Feel free to ask me about any location, event, or how to use our website features!";
     }
     
     return "Thank you for your question! I'm here to help you explore Lord Rama's sacred journey. Whether you're interested in specific locations, the cultural significance, or how to navigate our website, I'm ready to assist. Is there anything else about Rama's journey I can help you explore? 🙏";
@@ -133,12 +142,13 @@ const SaranshChatbot = () => {
 
     setMessages([...messages, userMessage, aiResponse]);
     setInputText('');
-    setShowQuestions(false);
   };
 
   const handleQuestionClick = (question: string) => {
     setInputText(question);
-    handleSendMessage();
+    setTimeout(() => {
+      handleSendMessage();
+    }, 100);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -198,7 +208,7 @@ const SaranshChatbot = () => {
                     className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-xs p-3 rounded-2xl text-sm shadow-sm ${
+                      className={`max-w-xs p-3 rounded-2xl text-sm shadow-sm whitespace-pre-line ${
                         message.isUser
                           ? 'bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-br-md'
                           : 'bg-white text-gray-800 border border-orange-100 rounded-bl-md'
@@ -208,22 +218,21 @@ const SaranshChatbot = () => {
                     </div>
                   </div>
                 ))}
+                <div ref={messagesEndRef} />
                 
-                {/* Starter Questions */}
-                {showQuestions && (
-                  <div className="space-y-2 mt-4">
-                    <p className="text-xs text-gray-500 text-center">Try asking:</p>
-                    {starterQuestions.map((question, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleQuestionClick(question)}
-                        className="w-full text-left p-2 text-xs bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors border border-orange-200"
-                      >
-                        {question}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                {/* Starter Questions - Always visible */}
+                <div className="space-y-2 mt-4">
+                  <p className="text-xs text-gray-500 text-center">Quick questions:</p>
+                  {starterQuestions.map((question, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleQuestionClick(question)}
+                      className="w-full text-left p-2 text-xs bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors border border-orange-200"
+                    >
+                      {question}
+                    </button>
+                  ))}
+                </div>
               </div>
               
               {/* Input Area */}
