@@ -11,9 +11,7 @@ export const HeroSection = () => {
           <h1 className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-5 animate-fade-in">
             Footsteps of Rama
           </h1>
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-white mb-8 animate-fade-in drop-shadow">
-            We aim to inspire a newfound appreciation for India's rich cultural legacy among the contemporary audiences, through immersive storytelling experiences combining art, culture & heritage, travel & history.
-          </p>
+          
           <div className="flex justify-center gap-5 animate-fade-in flex-wrap mb-8">
             <Link to="/immersive" className="bg-gradient-to-r from-purple-600 to-orange-600 text-white px-7 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-orange-700 shadow-lg transition hover-scale text-lg">Experience the Epic</Link>
             <Link to="/map" className="bg-orange-600 text-white px-7 py-3 rounded-full font-semibold hover:bg-orange-700 shadow-lg transition hover-scale text-lg">The Ramayana Trail</Link>
