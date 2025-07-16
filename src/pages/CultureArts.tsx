@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 const CultureArts = () => {
   return (
     <main className="pt-24 pb-10 min-h-screen">
-      {/* Hero Section with Background Image */}
-      <div className="relative h-96 flex items-center justify-center text-center bg-cover bg-center"
+      {/* Hero Section with Enlarged Background Image */}
+      <div className="relative h-[600px] flex items-center justify-center text-center bg-cover bg-center"
            style={{ backgroundImage: "url('/lovable-uploads/571ec64b-7729-4437-a67e-93675fe19bcf.png')" }}>
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative z-10 max-w-4xl mx-auto px-6">

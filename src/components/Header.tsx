@@ -1,3 +1,4 @@
+
 import { Link, useLocation } from "react-router-dom";
 import { Map, BookOpen, Home, Compass, Palette, Eye } from "lucide-react";
 
@@ -7,7 +8,6 @@ const nav = [
   { title: "Mapping Ramayana Trail", to: "/map", icon: Map },
   { title: "Trip Planner", to: "/trip-planner", icon: Compass },
   { title: "Culture & Arts", to: "/culture-arts", icon: Palette },
-  { title: "Resources", to: "/resources", icon: BookOpen },
 ];
 
 export const Header = () => {

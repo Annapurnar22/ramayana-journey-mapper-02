@@ -10,9 +10,9 @@ import { Header } from "@/components/Header";
 import Footer from "@/components/Footer";
 import MapPage from "@/pages/Map";
 import TripPlanner from "@/pages/TripPlanner";
-import Resources from "@/pages/Resources";
 import ImmersiveView from "@/pages/ImmersiveView";
 import CultureArts from "@/pages/CultureArts";
+import SaranshChatbot from "@/components/SaranshChatbot";
 
 const queryClient = new QueryClient();
 
@@ -30,12 +30,12 @@ const App = () => (
               <Route path="/immersive" element={<ImmersiveView />} />
               <Route path="/map" element={<MapPage />} />
               <Route path="/trip-planner" element={<TripPlanner />} />
-              <Route path="/resources" element={<Resources />} />
               <Route path="/culture-arts" element={<CultureArts />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
           <Footer />
+          <SaranshChatbot />
         </div>
       </BrowserRouter>
     </TooltipProvider>

@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { MessageCircle, Settings, Car, UserCheck } from "lucide-react";
 export const HeroSection = () => {
@@ -13,9 +14,9 @@ export const HeroSection = () => {
           </h1>
           
           <div className="flex justify-center gap-5 animate-fade-in flex-wrap mb-8">
-            <Link to="/immersive" className="bg-gradient-to-r from-purple-600 to-orange-600 text-white px-7 py-3 rounded-full font-semibold hover:from-purple-700 hover:to-orange-700 shadow-lg transition hover-scale text-lg">Experience the Epic</Link>
-            <Link to="/map" className="bg-orange-600 text-white px-7 py-3 rounded-full font-semibold hover:bg-orange-700 shadow-lg transition hover-scale text-lg">The Ramayana Trail</Link>
-            <Link to="/trip-planner" className="bg-sky-600 text-white px-7 py-3 rounded-full font-semibold hover:bg-sky-700 shadow-lg transition hover-scale text-lg">Plan your Travel</Link>
+            <Link to="/immersive" className="bg-white/80 backdrop-blur-sm text-purple-800 px-7 py-3 rounded-full font-semibold hover:bg-white/90 shadow-lg transition hover-scale text-lg">Experience the Epic</Link>
+            <Link to="/map" className="bg-white/80 backdrop-blur-sm text-orange-800 px-7 py-3 rounded-full font-semibold hover:bg-white/90 shadow-lg transition hover-scale text-lg">The Ramayana Trail</Link>
+            <Link to="/trip-planner" className="bg-white/80 backdrop-blur-sm text-sky-800 px-7 py-3 rounded-full font-semibold hover:bg-white/90 shadow-lg transition hover-scale text-lg">Plan your Travel</Link>
           </div>
           
           <p className="text-sm text-white font-medium">Learn. Travel. Experience. <span className="inline-block ml-1 animate-pulse text-orange-300">✨</span></p>
@@ -23,11 +24,10 @@ export const HeroSection = () => {
           {/* Feature Cards Section */}
           
 
-          <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <div className="mt-6 grid grid-cols-2 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
             <Link to="/culture-arts" className="bg-white/80 backdrop-blur-sm px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition text-orange-800 font-medium">
               Culture & Arts
             </Link>
-            <Link to="/resources" className="bg-white/80 backdrop-blur-sm px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition text-orange-800 font-medium">Explore the Epic</Link>
             <Link to="/immersive" className="bg-white/80 backdrop-blur-sm px-4 py-3 rounded-lg shadow-md hover:shadow-lg transition text-orange-800 font-medium">Immersive View</Link>
           </div>
         </div>
