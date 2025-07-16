@@ -1,5 +1,4 @@
-
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MessageCircle, X, Send, Maximize2, Minimize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,7 +22,7 @@ const SaranshChatbot = () => {
     }
   ]);
   const [inputText, setInputText] = useState('');
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [showQuestions, setShowQuestions] = useState(true);
 
   const starterQuestions = [
     "How do I use this website?",
@@ -33,14 +32,6 @@ const SaranshChatbot = () => {
     "Can I visit these places?",
     "I'm new to Ramayana"
   ];
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
   const getAIResponse = (userMessage: string): string => {
     const lowerMessage = userMessage.toLowerCase();
@@ -120,11 +111,7 @@ const SaranshChatbot = () => {
       return "Wonderful! Here are ways to deepen your knowledge:\n\n📚 Follow the complete timeline from start to finish\n🎭 Read the cultural context sections for each location\n👥 Explore the character profiles and their relationships\n📖 Check out our resources section for further reading\n🚶 Consider planning a pilgrimage to these sacred sites\n\nWhat aspect interests you most - the spiritual teachings, historical connections, or the adventure story?";
     }
     
-    if (lowerMessage.includes('culture') || lowerMessage.includes('arts')) {
-      return "Our Culture & Arts section showcases the rich artistic heritage inspired by the Ramayana! You'll find:\n\n🎨 Traditional paintings and sculptures\n🎭 Classical dance forms depicting Rama's story\n🎵 Devotional music and bhajans\n🏛️ Temple architecture across India\n📜 Regional variations of the epic\n\nClick on 'Culture & Arts' in our navigation to explore this beautiful collection!";
-    }
-    
-    return "Thank you for your question! I'm here to help you explore Lord Rama's sacred journey. Whether you're interested in specific locations, the cultural significance, or how to navigate our website, I'm ready to assist. Feel free to ask me anything else about Rama's journey! 🙏";
+    return "Thank you for your question! I'm here to help you explore Lord Rama's sacred journey. Whether you're interested in specific locations, the cultural significance, or how to navigate our website, I'm ready to assist. Is there anything else about Rama's journey I can help you explore? 🙏";
   };
 
   const handleSendMessage = () => {
@@ -146,24 +133,12 @@ const SaranshChatbot = () => {
 
     setMessages([...messages, userMessage, aiResponse]);
     setInputText('');
+    setShowQuestions(false);
   };
 
   const handleQuestionClick = (question: string) => {
-    const userMessage: Message = {
-      id: messages.length + 1,
-      text: question,
-      isUser: true,
-      timestamp: new Date()
-    };
-
-    const aiResponse: Message = {
-      id: messages.length + 2,
-      text: getAIResponse(question),
-      isUser: false,
-      timestamp: new Date()
-    };
-
-    setMessages([...messages, userMessage, aiResponse]);
+    setInputText(question);
+    handleSendMessage();
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -229,27 +204,26 @@ const SaranshChatbot = () => {
                           : 'bg-white text-gray-800 border border-orange-100 rounded-bl-md'
                       }`}
                     >
-                      {message.text.split('\n').map((line, index) => (
-                        <div key={index}>{line}</div>
-                      ))}
+                      {message.text}
                     </div>
                   </div>
                 ))}
                 
-                {/* Always Show Starter Questions */}
-                <div className="space-y-2 mt-4 border-t border-orange-100 pt-3">
-                  <p className="text-xs text-gray-500 text-center">Try asking:</p>
-                  {starterQuestions.map((question, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleQuestionClick(question)}
-                      className="w-full text-left p-2 text-xs bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors border border-orange-200"
-                    >
-                      {question}
-                    </button>
-                  ))}
-                </div>
-                <div ref={messagesEndRef} />
+                {/* Starter Questions */}
+                {showQuestions && (
+                  <div className="space-y-2 mt-4">
+                    <p className="text-xs text-gray-500 text-center">Try asking:</p>
+                    {starterQuestions.map((question, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleQuestionClick(question)}
+                        className="w-full text-left p-2 text-xs bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors border border-orange-200"
+                      >
+                        {question}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               
               {/* Input Area */}
