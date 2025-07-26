@@ -24,6 +24,7 @@ const SaranshChatbot = () => {
   ]);
   const [inputText, setInputText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const starterQuestions = [
     "How do I use this website?",
@@ -35,7 +36,9 @@ const SaranshChatbot = () => {
   ];
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
@@ -140,15 +143,26 @@ const SaranshChatbot = () => {
       timestamp: new Date()
     };
 
-    setMessages([...messages, userMessage, aiResponse]);
+    setMessages(prev => [...prev, userMessage, aiResponse]);
     setInputText('');
   };
 
   const handleQuestionClick = (question: string) => {
-    setInputText(question);
-    setTimeout(() => {
-      handleSendMessage();
-    }, 100);
+    const userMessage: Message = {
+      id: messages.length + 1,
+      text: question,
+      isUser: true,
+      timestamp: new Date()
+    };
+
+    const aiResponse: Message = {
+      id: messages.length + 2,
+      text: getAIResponse(question),
+      isUser: false,
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage, aiResponse]);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -158,7 +172,7 @@ const SaranshChatbot = () => {
   };
 
   const chatWidth = isExpanded ? 'w-96' : 'w-80';
-  const chatHeight = isExpanded ? 'h-[500px]' : 'h-96';
+  const chatHeight = isExpanded ? 'h-[600px]' : 'h-96';
 
   return (
     <>
@@ -199,16 +213,21 @@ const SaranshChatbot = () => {
               </div>
               <p className="text-orange-100 text-xs">Your guide to Rama's journey</p>
             </CardHeader>
+            
             <CardContent className="flex-1 flex flex-col p-0">
-              {/* Messages */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gradient-to-b from-orange-50/30 to-white">
+              {/* Messages Container with proper scrolling */}
+              <div 
+                ref={chatContainerRef}
+                className="flex-1 overflow-y-auto p-4 space-y-3 bg-gradient-to-b from-orange-50/30 to-white"
+                style={{ maxHeight: isExpanded ? '450px' : '240px' }}
+              >
                 {messages.map((message) => (
                   <div
                     key={message.id}
                     className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-xs p-3 rounded-2xl text-sm shadow-sm whitespace-pre-line ${
+                      className={`max-w-[85%] p-3 rounded-2xl text-sm shadow-sm whitespace-pre-line ${
                         message.isUser
                           ? 'bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-br-md'
                           : 'bg-white text-gray-800 border border-orange-100 rounded-bl-md'
@@ -219,15 +238,18 @@ const SaranshChatbot = () => {
                   </div>
                 ))}
                 <div ref={messagesEndRef} />
-                
-                {/* Starter Questions - Always visible */}
-                <div className="space-y-2 mt-4">
-                  <p className="text-xs text-gray-500 text-center">Quick questions:</p>
+              </div>
+
+              {/* Starter Questions - Always visible */}
+              <div className="p-3 border-t border-orange-100 bg-orange-50/50">
+                <p className="text-xs text-gray-500 text-center mb-2">Quick questions:</p>
+                <div className="grid grid-cols-1 gap-1 max-h-24 overflow-y-auto">
                   {starterQuestions.map((question, index) => (
                     <button
                       key={index}
                       onClick={() => handleQuestionClick(question)}
-                      className="w-full text-left p-2 text-xs bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors border border-orange-200"
+                      className="text-left p-2 text-xs bg-white hover:bg-orange-100 rounded-lg transition-colors border border-orange-200 truncate"
+                      title={question}
                     >
                       {question}
                     </button>
