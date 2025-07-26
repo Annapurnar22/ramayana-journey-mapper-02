@@ -1,73 +1,15 @@
-# Welcome to your Lovable project
+# Welcome
 
 ## Project info
+Our Mini-project "The Footsteps of Rama: From Ayodhya to Sri Lanka” is a digital initiative aimed at creating a modern cultural tourism platform presenting the timeless epic ‘The Ramayana’, which is one of the two major Sanskrit epics of ancient India and an important text of Hinduism. Our website represents a pioneering effort to leverage digital technology and creative storytelling to reconnect today's youth with the profound cultural heritage of India embodied in the Ramayana narrative. 
+The Ramayana, has deeply shaped the cultural, moral, and spiritual fabric of the Indian subcontinent for centuries. Its narratives, characters, and values continue to inspire not only religious devotion but also literature, art, music, and performance traditions across diverse regions and languages. Today, with renewed interest in exploring India’s cultural roots and historical geography, there is a growing demand for accessible, engaging platforms that combine education and travel.
 
-**URL**: https://lovable.dev/projects/604666fc-c850-480b-81bd-641a9938c381
+**URL**: https://ramayana-journey-mapper-02.lovable.app/
 
-## How can I edit this code?
+**Problem Statement:**
+Despite The Ramayana’s enduring significance, available resources in the current digital ecosystem surrounding the epic are fragmented across disparate platforms: some focus on scripture and scholarly interpretation, others on travel blogs or cultural references, and few provide immersive or interactive experiences. Most lack regional language support, contextual storytelling, or real-world travel integration.
+This fragmented ecosystem creates significant barriers for modern users—especially students, educators, and culturally curious travelers—who seek a meaningful, holistic engagement with the epic. There is no single platform that connects the literary richness of the Ramayana with the geographical journey of Lord Rama in a way that is educational, interactive, and actionable.
 
-There are several ways of editing your application.
+**Project Presentation pdf:** https://www.canva.com/design/DAGq6NfxaFs/QQ_Q7UWuXJgMYI6KgAM7Vw/view?utm_content=DAGq6NfxaFs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb4c2ba9f5b
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/604666fc-c850-480b-81bd-641a9938c381) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/604666fc-c850-480b-81bd-641a9938c381) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Thank you!!
