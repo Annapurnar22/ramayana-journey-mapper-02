@@ -1,7 +1,5 @@
 # FOOTSTEPS OF RAMA
 
-Welcome, presenting to you our Mini-Project.
-
 ## Project info
 Our Mini-project "The Footsteps of Rama: From Ayodhya to Sri Lanka” is a digital initiative aimed at creating a modern cultural tourism platform presenting the timeless epic ‘The Ramayana’, which is one of the two major Sanskrit epics of ancient India and an important text of Hinduism. Our website represents a pioneering effort to leverage digital technology and creative storytelling to reconnect today's youth with the profound cultural heritage of India embodied in the Ramayana narrative. 
 The Ramayana, has deeply shaped the cultural, moral, and spiritual fabric of the Indian subcontinent for centuries. Its narratives, characters, and values continue to inspire not only religious devotion but also literature, art, music, and performance traditions across diverse regions and languages. Today, with renewed interest in exploring India’s cultural roots and historical geography, there is a growing demand for accessible, engaging platforms that combine education and travel.
